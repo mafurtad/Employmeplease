@@ -1,5 +1,4 @@
 # FlyerFlo interview test
-#Ian Droog
 import urllib2
 import re
 from os.path import basename
