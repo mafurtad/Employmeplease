@@ -1,0 +1,23 @@
+# FlyerFlo interview test
+#Ian Droog
+import urllib2
+import re
+from os.path import basename
+from urlparse import urlsplit
+
+#step one: find the correct image url
+redditpage=raw_input("please input the SubReddit page url, ex: \"http://www.reddit.com/r/worldnews/\"")      #web address input
+print(redditpage)   #web address confirmation
+page=urllib2.urlopen(redditpage).read()     #opens source code for image search
+img=re.findall('img id=\'header-img\' src="(.*?)"', page)   #finds header image (uniquely tagged "img id='header-img'")
+
+#step two: download the image
+for imgUrl in img: #downloads the reddit header image to Python27 folder
+    try:
+        imgData=urllib2.urlopen(imgUrl).read()
+        fileName=basename(urlsplit(imgUrl)[2])
+        output=open(fileName,'wb')
+        output.write(imgData)
+        output.close()
+    except:
+        pass
